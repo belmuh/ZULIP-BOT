@@ -1,0 +1,38 @@
+name: Daily Zulip Message
+
+on:
+  schedule:
+    # Every day at 08:00 Istanbul time (UTC+3 = UTC 05:00)
+    - cron: '0 6 * * *'
+
+  workflow_dispatch:
+    inputs:
+      custom_message:
+        description: 'What a wonderful day!'
+        required: false
+        default: ''
+
+jobs:
+  send-message:
+    name: Send Daily Message to Zulip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x ./send_daily_message.sh
+
+      - name: Send Zulip Message
+        env:
+          ZULIP_EMAIL: ${{ secrets.ZULIP_EMAIL }}
+          ZULIP_API_KEY: ${{ secrets.ZULIP_API_KEY }}
+          ZULIP_SITE: ${{ secrets.ZULIP_SITE }}
+          ZULIP_TO: ${{ secrets.ZULIP_TO }}
+          CUSTOM_MESSAGE: ${{ inputs.custom_message }}
+        run: ./send_daily_message.sh
+
+      - name: Log result
+        if: success()
+        run: echo "Daily message sent successfully at $(date)"
