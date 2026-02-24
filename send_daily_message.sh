@@ -10,7 +10,7 @@ set -euo pipefail
 
 TODAY=$(date '+%A, %d %B %Y')
 
-MESSAGE="${CUSTOM_MESSAGE:-Good morning! Have a wonderful day!
+MESSAGE="${CUSTOM_MESSAGE:-What a wonderful world!
 
 📅 **${TODAY}**}"
 
@@ -19,8 +19,9 @@ echo "Sending message to Zulip..."
 RESPONSE=$(curl -s -o /tmp/zulip_response.json -w "%{http_code}" \
   -X POST "${ZULIP_SITE}/api/v1/messages" \
   -u "${ZULIP_EMAIL}:${ZULIP_API_KEY}" \
-  --data-urlencode "type=direct" \
-  --data-urlencode "to=[${ZULIP_TO}]" \
+  --data-urlencode "type=stream" \
+  --data-urlencode "to=${ZULIP_TO}" \
+  --data-urlencode "topic=✔Workshop - Zulip integration" \
   --data-urlencode "content=${MESSAGE}")
 
 if [ "$RESPONSE" -eq 200 ]; then
