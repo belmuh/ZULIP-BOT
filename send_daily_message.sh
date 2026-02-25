@@ -21,7 +21,7 @@ RESPONSE=$(curl -s -o /tmp/zulip_response.json -w "%{http_code}" \
   -u "${ZULIP_EMAIL}:${ZULIP_API_KEY}" \
   --data-urlencode "type=stream" \
   --data-urlencode "to=${ZULIP_TO}" \
-  --data-urlencode "topic=✔Workshop - Zulip integration" \
+  --data-urlencode "topic=✔ Workshop - Zulip integration" \
   --data-urlencode "content=${MESSAGE}")
 
 if [ "$RESPONSE" -eq 200 ]; then
