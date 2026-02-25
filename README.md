@@ -1,6 +1,6 @@
 # Zulip Daily Message Bot
 
-Sends an automatic daily Zulip message every morning at 09:00 via GitHub Actions.
+Sends an automatic daily Zulip message to a channel every morning at 09:00 via GitHub Actions.
 
 ## Setup
 
@@ -10,15 +10,13 @@ ZULIP-BOT/
 ├── send_daily_message.sh
 ├── .github/
 │   └── workflows/
-│       └── daily-message.yml
+│       └── daily-reminder.yml
 └── README.md
 ```
 
-### 2. Create a Zulip Bot
+### 2. Get Your Zulip API Key
 
-1. Zulip → **Settings** → **Personal settings** → **Bots**
-2. **Add a new bot** → Type: **Generic bot**
-3. Copy the `API key` and `bot email`
+Zulip → **Settings** → **Account & privacy** → **API key** → **Show/Generate your API key**
 
 ### 3. Add GitHub Secrets
 
@@ -26,10 +24,10 @@ Repo → **Settings** → **Secrets and variables** → **Actions** → **New re
 
 | Secret | Value | Example |
 |--------|-------|---------|
-| `ZULIP_EMAIL` | Bot email address | `mybot-bot@yourorg.zulipchat.com` |
-| `ZULIP_API_KEY` | Bot API key | `abcdef1234567890...` |
+| `ZULIP_EMAIL` | Your Zulip email address | `you@yourorg.zulipchat.com` |
+| `ZULIP_API_KEY` | Your Zulip API key | `abcdef1234567890...` |
 | `ZULIP_SITE` | Zulip instance URL | `https://yourorg.zulipchat.com` |
-| `ZULIP_TO` | Your user ID | `1020816` |
+| `ZULIP_TO` | Channel name | `Bulut Bilişim Genel` |
 
 ### 4. Test
 
